@@ -157,7 +157,7 @@ export default function Waitlist() {
                       required
                       checked={acknowledged}
                       onChange={(e) => setAcknowledged(e.target.checked)}
-                      className="mt-0.5 h-4 w-4 shrink-0 accent-[#56dfc3]"
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-[#e6e9ec]"
                     />
                     <span className="text-xs leading-relaxed text-fog">
                       I confirm I am at least 21 years of age and that my

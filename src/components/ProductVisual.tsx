@@ -1,15 +1,17 @@
 /**
  * ── PLACEHOLDER PRODUCT VISUAL ──────────────────────────────────────────
- * Brand product photography was not present in /assets at build time.
- * This renders a restrained vector vial so the showcase grid ships with
- * correct layout and motion. Swap for real imagery by replacing this
- * component's output with <Image src={`/assets/products/${slug}.png`} …/>.
- * Cards also carry a visible "RENDER PENDING" tag until then.
+ * Official product photography exists (clear vial, black cap, silver
+ * label) but hasn't landed in /assets as files yet. This vector stand-in
+ * mirrors that label system — silver plate, black type, RL lot code —
+ * so the grid reads on-brand until the real renders drop in. Swap by
+ * replacing this component's output with
+ * <Image src={`/assets/products/${slug}.png`} … /> — cards carry a
+ * visible "RENDER PENDING" tag until then.
  */
 interface ProductVisualProps {
-  /** Compound name engraved on the vial label. */
+  /** Compound name printed on the label. */
   name: string;
-  /** Lot-style catalog code shown beneath the name. */
+  /** Lot-style catalog code (matches official label format, e.g. RL-001). */
   code: string;
 }
 
@@ -22,72 +24,92 @@ export default function ProductVisual({ name, code }: ProductVisualProps) {
       aria-label={`${name} vial — placeholder render`}
     >
       <defs>
-        {/* Glass body: subtle vertical sheen */}
+        {/* Clear glass body */}
         <linearGradient id={`glass-${code}`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#1c2026" />
-          <stop offset="18%" stopColor="#2a2f37" />
-          <stop offset="50%" stopColor="#181b20" />
-          <stop offset="82%" stopColor="#23272e" />
-          <stop offset="100%" stopColor="#15181d" />
+          <stop offset="0%" stopColor="#23262b" />
+          <stop offset="16%" stopColor="#33373d" />
+          <stop offset="50%" stopColor="#1e2126" />
+          <stop offset="84%" stopColor="#2c3036" />
+          <stop offset="100%" stopColor="#1a1d21" />
         </linearGradient>
+        {/* Black cap, per official photography */}
         <linearGradient id={`cap-${code}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3a4049" />
-          <stop offset="100%" stopColor="#23272e" />
+          <stop offset="0%" stopColor="#26282c" />
+          <stop offset="100%" stopColor="#101215" />
+        </linearGradient>
+        {/* Brushed-silver label stock */}
+        <linearGradient id={`label-${code}`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#c7cbd1" />
+          <stop offset="45%" stopColor="#e3e6ea" />
+          <stop offset="100%" stopColor="#b9bec5" />
         </linearGradient>
       </defs>
 
       {/* Cap */}
-      <rect x="72" y="24" width="56" height="26" rx="4" fill={`url(#cap-${code})`} />
-      <rect x="72" y="46" width="56" height="6" fill="#101317" />
+      <rect x="70" y="22" width="60" height="30" rx="5" fill={`url(#cap-${code})`} />
+      {/* Crimp collar */}
+      <rect x="74" y="50" width="52" height="10" rx="2" fill="#8f959c" />
       {/* Neck */}
-      <rect x="80" y="52" width="40" height="14" fill={`url(#glass-${code})`} />
+      <rect x="80" y="60" width="40" height="10" fill={`url(#glass-${code})`} />
       {/* Body */}
       <rect
-        x="58"
-        y="66"
-        width="84"
-        height="160"
+        x="56"
+        y="70"
+        width="88"
+        height="158"
         rx="10"
         fill={`url(#glass-${code})`}
-        stroke="#2c313a"
+        stroke="#3a3f46"
         strokeWidth="1"
       />
-      {/* Sheen line */}
-      <rect x="70" y="78" width="4" height="136" rx="2" fill="#ffffff" opacity="0.06" />
+      {/* Glass sheen */}
+      <rect x="66" y="80" width="4" height="138" rx="2" fill="#ffffff" opacity="0.08" />
 
-      {/* Label plate */}
-      <rect x="66" y="112" width="68" height="72" rx="3" fill="#0e1013" stroke="#22262c" strokeWidth="1" />
+      {/* Silver label wrap */}
+      <rect x="57" y="106" width="86" height="88" fill={`url(#label-${code})`} />
       <text
         x="100"
-        y="136"
+        y="130"
         textAnchor="middle"
-        fill="#eef1f4"
+        fill="#111318"
+        fontSize="9"
+        fontWeight="700"
+        letterSpacing="0.16em"
+        fontFamily="var(--font-sans), sans-serif"
+      >
+        RENOVO LABS
+      </text>
+      <text
+        x="100"
+        y="152"
+        textAnchor="middle"
+        fill="#111318"
         fontSize="10.5"
-        fontWeight="600"
-        letterSpacing="0.06em"
+        fontWeight="700"
+        letterSpacing="0.05em"
         fontFamily="var(--font-mono), monospace"
       >
-        {name}
+        {name.toUpperCase()}
       </text>
-      <line x1="76" y1="146" x2="124" y2="146" stroke="#22262c" strokeWidth="1" />
-      <text
-        x="100"
-        y="162"
-        textAnchor="middle"
-        fill="#56dfc3"
-        fontSize="8"
-        letterSpacing="0.18em"
-        fontFamily="var(--font-mono), monospace"
-      >
-        {code}
-      </text>
+      <line x1="70" y1="162" x2="130" y2="162" stroke="#9aa0a8" strokeWidth="0.75" />
       <text
         x="100"
         y="176"
         textAnchor="middle"
-        fill="#8b939e"
+        fill="#3c4249"
+        fontSize="7.5"
+        letterSpacing="0.16em"
+        fontFamily="var(--font-mono), monospace"
+      >
+        LOT: {code}
+      </text>
+      <text
+        x="100"
+        y="188"
+        textAnchor="middle"
+        fill="#565d66"
         fontSize="6"
-        letterSpacing="0.14em"
+        letterSpacing="0.12em"
         fontFamily="var(--font-mono), monospace"
       >
         RESEARCH USE ONLY

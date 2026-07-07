@@ -13,17 +13,18 @@ export interface Product {
   slug: string;
 }
 
+// Codes follow the lot format on the official label stock (LOT: RL-001A).
 export const PRODUCTS: Product[] = [
-  { name: "Retatrutide", code: "RNV-001", slug: "retatrutide" },
-  { name: "Tirzepatide", code: "RNV-002", slug: "tirzepatide" },
-  { name: "BPC-157", code: "RNV-003", slug: "bpc-157" },
-  { name: "GHK-Cu", code: "RNV-004", slug: "ghk-cu" },
-  { name: "Glutathione", code: "RNV-005", slug: "glutathione" },
-  { name: "Semax", code: "RNV-006", slug: "semax" },
-  { name: "NAD+", code: "RNV-007", slug: "nad-plus" },
-  { name: "MOTS-c", code: "RNV-008", slug: "mots-c" },
-  { name: "Tesamorelin", code: "RNV-009", slug: "tesamorelin" },
-  { name: "KPV", code: "RNV-010", slug: "kpv" },
+  { name: "Retatrutide", code: "RL-001", slug: "retatrutide" },
+  { name: "Tirzepatide", code: "RL-002", slug: "tirzepatide" },
+  { name: "BPC-157", code: "RL-003", slug: "bpc-157" },
+  { name: "GHK-Cu", code: "RL-004", slug: "ghk-cu" },
+  { name: "Glutathione", code: "RL-005", slug: "glutathione" },
+  { name: "Semax", code: "RL-006", slug: "semax" },
+  { name: "NAD+", code: "RL-007", slug: "nad-plus" },
+  { name: "MOTS-c", code: "RL-008", slug: "mots-c" },
+  { name: "Tesamorelin", code: "RL-009", slug: "tesamorelin" },
+  { name: "KPV", code: "RL-010", slug: "kpv" },
 ];
 
 /** Valid values accepted by the waitlist API for product_interest. */

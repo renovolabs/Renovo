@@ -2,9 +2,11 @@
 
 /*
  * Renovo Labs — design tokens.
- * PALETTE NOTE: brand assets were not present in /assets at build time.
- * These values are tasteful placeholders — swap them for the official
- * brand palette when it lands (single source of truth: this @theme block).
+ * Palette derived from provided brand assets (see chat / /assets):
+ * the brand is strictly monochrome — black mark, white knockout,
+ * silver label stock. The site follows: near-black base, platinum
+ * accent, no chroma anywhere. This @theme block is the single
+ * source of truth.
  */
 @theme {
   /* Surfaces — near-black, never pure black */
@@ -17,8 +19,9 @@
   --color-fog: #8b939e; /* muted copy */
   --color-snow: #eef1f4; /* primary copy */
 
-  /* THE one accent. Used for CTA, focus, and small technical labels only. */
-  --color-accent: #56dfc3;
+  /* THE one accent — platinum, matching the silver label stock.
+     Used for CTA, focus, and small technical labels only. */
+  --color-accent: #e6e9ec;
 
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Helvetica, Arial, sans-serif;

@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Placeholder favicon — replace with official brand mark from /assets -->
+  <!-- Placeholder favicon — swap for the official interlocked-R mark
+       once the logo files land in /assets -->
   <rect width="64" height="64" rx="14" fill="#0b0c0e"/>
   <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#22262c" stroke-width="2"/>
-  <text x="32" y="42" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="28" font-weight="700" fill="#56dfc3">R</text>
+  <text x="32" y="42" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="28" font-weight="700" fill="#e6e9ec">R</text>
 </svg>
