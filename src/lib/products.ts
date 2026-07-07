@@ -11,11 +11,21 @@ export interface Product {
   code: string;
   /** Stable slug, used as the value for the waitlist interest dropdown. */
   slug: string;
+  /**
+   * Official product photography under /public/assets/products.
+   * Absent → the card renders the clearly-marked placeholder vial.
+   */
+  image?: string;
 }
 
 // Codes follow the lot format on the official label stock (LOT: RL-001A).
 export const PRODUCTS: Product[] = [
-  { name: "Retatrutide", code: "RL-001", slug: "retatrutide" },
+  {
+    name: "Retatrutide",
+    code: "RL-001",
+    slug: "retatrutide",
+    image: "/assets/products/retatrutide.png",
+  },
   { name: "Tirzepatide", code: "RL-002", slug: "tirzepatide" },
   { name: "BPC-157", code: "RL-003", slug: "bpc-157" },
   { name: "GHK-Cu", code: "RL-004", slug: "ghk-cu" },

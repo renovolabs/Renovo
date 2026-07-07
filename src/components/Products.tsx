@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { PRODUCTS } from "@/lib/products";
 import ProductVisual from "./ProductVisual";
 import Reveal from "./Reveal";
@@ -27,8 +28,19 @@ export default function Products() {
             {/* Stagger within each viewport row, capped so late rows don't lag */}
             <Reveal delay={(i % 5) * 0.08}>
               <div className="group relative rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 hover:border-accent/40 sm:p-5">
-                <div className="aspect-[3/4]">
-                  <ProductVisual name={product.name} code={product.code} />
+                <div className="relative aspect-[3/4] overflow-hidden rounded-xl">
+                  {product.image ? (
+                    // Official product photography
+                    <Image
+                      src={product.image}
+                      alt={`${product.name} vial — Renovo Labs`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <ProductVisual name={product.name} code={product.code} />
+                  )}
                 </div>
 
                 <div className="mt-4 flex items-baseline justify-between gap-2">
@@ -40,10 +52,12 @@ export default function Products() {
                   </span>
                 </div>
 
-                {/* Visible placeholder marker — remove when photography lands */}
-                <span className="mt-2 inline-block font-mono text-[9px] uppercase tracking-[0.2em] text-fog/50">
-                  Render pending
-                </span>
+                {/* Visible placeholder marker — cleared as photography lands */}
+                {!product.image && (
+                  <span className="mt-2 inline-block font-mono text-[9px] uppercase tracking-[0.2em] text-fog/50">
+                    Render pending
+                  </span>
+                )}
               </div>
             </Reveal>
           </li>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
@@ -33,15 +34,26 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto max-w-4xl text-center">
+        {/* Brand mark — leads the entrance choreography */}
+        <motion.div {...rise(0)} className="flex justify-center">
+          <Image
+            src="/assets/logo-mark-white.png"
+            alt="Renovo Labs"
+            width={83}
+            height={60}
+            priority
+          />
+        </motion.div>
+
         <motion.p
-          {...rise(0)}
-          className="font-mono text-[11px] uppercase tracking-[0.34em] text-accent"
+          {...rise(1)}
+          className="mt-8 font-mono text-[11px] uppercase tracking-[0.34em] text-accent"
         >
           Renovo Labs · Est. 2026
         </motion.p>
 
         <motion.h1
-          {...rise(1)}
+          {...rise(2)}
           className="mt-8 text-balance text-5xl font-semibold leading-[1.04] tracking-[-0.03em] text-snow sm:text-6xl md:text-7xl"
         >
           Research-grade peptides.
@@ -50,7 +62,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          {...rise(2)}
+          {...rise(3)}
           className="mx-auto mt-8 max-w-xl text-pretty text-base leading-relaxed text-fog sm:text-lg"
         >
           A new standard of purity, traceability, and analytical rigor —
@@ -58,7 +70,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          {...rise(3)}
+          {...rise(4)}
           className="mt-12 flex flex-col items-center gap-4"
         >
           <a
@@ -75,7 +87,7 @@ export default function Hero() {
 
       {/* Scroll hint — static, quiet */}
       <motion.div
-        {...rise(4)}
+        {...rise(5)}
         aria-hidden
         className="absolute bottom-8 font-mono text-[10px] tracking-[0.3em] text-fog/60"
       >

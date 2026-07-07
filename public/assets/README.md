@@ -1,17 +1,17 @@
-# Brand asset drop zone
+# Brand assets
 
-Official brand assets were **not available** when this site was built, so the
-site currently runs on clearly-marked placeholders:
+| File | What it is |
+| --- | --- |
+| `logo.png` | Official lockup as provided (black on white) |
+| `logo-mark-white.png` | Interlocked-R mark, white knockout on transparency — generated from `logo.png`; used in nav + hero |
+| `logo-full-white.png` | Full lockup, white knockout — used in footer |
+| `products/retatrutide.png` | Official Retatrutide photography |
 
-| Asset | Placeholder in use | Where to swap |
-| --- | --- | --- |
-| Logo / wordmark | Typographic `RENOVO LABS` wordmark (official interlocked-R mark pending as a file) | `src/components/Nav.tsx`, `src/components/Footer.tsx`, `src/app/icon.svg` |
-| Brand palette | Monochrome system derived from the official assets (black mark / white knockout / silver label) | `@theme` block in `src/app/globals.css` |
-| Product photography | Vector vial renders mirroring the official label system (cards show a `RENDER PENDING` tag) | `src/components/ProductVisual.tsx` → replace with `next/image` |
+The favicon (`src/app/icon.png`) is the white mark on the site's near-black.
 
-Drop files here as:
+## Still pending
 
-```
-public/assets/logo.svg
-public/assets/products/<slug>.png   # slugs in src/lib/products.ts
-```
+Photography for the remaining nine compounds. Drop each as
+`products/<slug>.png` (slugs in `src/lib/products.ts`), then set the
+product's `image` field there — its card switches from the placeholder
+vial render automatically.

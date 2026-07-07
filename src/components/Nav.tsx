@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 /**
  * Fixed header: persistent compliance ticker + minimal wordmark nav.
  * The disclaimer bar is mandatory and must remain visible site-wide —
@@ -22,13 +24,22 @@ export default function Nav() {
         aria-label="Main"
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-          {/* Wordmark — replace with the official logo from /assets when provided */}
-          <a href="#top" className="flex items-baseline gap-2">
-            <span className="text-[15px] font-semibold tracking-[0.22em] text-snow">
-              RENOVO
-            </span>
-            <span className="font-mono text-[10px] tracking-[0.3em] text-fog">
-              LABS
+          {/* Official interlocked-R mark (white knockout) + wordmark */}
+          <a href="#top" className="flex items-center gap-3">
+            <Image
+              src="/assets/logo-mark-white.png"
+              alt="Renovo Labs mark"
+              width={36}
+              height={26}
+              priority
+            />
+            <span className="flex items-baseline gap-2">
+              <span className="text-[15px] font-semibold tracking-[0.22em] text-snow">
+                RENOVO
+              </span>
+              <span className="font-mono text-[10px] tracking-[0.3em] text-fog">
+                LABS
+              </span>
             </span>
           </a>
 

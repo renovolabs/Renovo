@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 /**
  * Footer — legal, contact, and the mandatory compliance block.
  * COMPLIANCE: the disclaimer text below is required verbatim in spirit;
@@ -9,15 +11,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-sm font-semibold tracking-[0.22em] text-snow">
-                RENOVO
-              </span>
-              <span className="font-mono text-[10px] tracking-[0.3em] text-fog">
-                LABS
-              </span>
-            </div>
-            <p className="mt-4 max-w-xs font-mono text-[10px] leading-relaxed tracking-[0.12em] text-fog/70">
+            {/* Official lockup — white knockout of the brand logo */}
+            <Image
+              src="/assets/logo-full-white.png"
+              alt="Renovo Labs"
+              width={112}
+              height={110}
+            />
+            <p className="mt-5 max-w-xs font-mono text-[10px] leading-relaxed tracking-[0.12em] text-fog/70">
               PRECISION-MANUFACTURED RESEARCH COMPOUNDS
             </p>
           </div>
