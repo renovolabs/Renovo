@@ -34,6 +34,21 @@ The API route (`src/app/api/waitlist/route.ts`) talks to Supabase's REST
 endpoint directly, so any PostgREST-compatible DB works by swapping the env
 vars.
 
+## Signup notifications (optional)
+
+Each successful signup can email the owner via [Resend](https://resend.com):
+
+1. Sign up at resend.com **using the inbox that should receive
+   notifications** (the sandbox sender only delivers to your own account
+   email until a domain is verified).
+2. API Keys → Create API Key, then set `RESEND_API_KEY` (and optionally
+   `WAITLIST_NOTIFY_TO` / `WAITLIST_NOTIFY_FROM`, see `.env.example`).
+3. For a branded sender, verify your domain under Resend → Domains and
+   point `WAITLIST_NOTIFY_FROM` at it.
+
+Unset, the feature is skipped entirely; email failures never block a
+signup.
+
 ## Deploying to Vercel
 
 Import the repo, add the two env vars, deploy. No other configuration.

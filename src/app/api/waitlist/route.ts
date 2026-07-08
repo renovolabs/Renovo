@@ -74,5 +74,50 @@ export async function POST(request: Request) {
     );
   }
 
+  // Best-effort owner notification — a failed email must never fail a signup.
+  await notifyOwner(email, productInterest);
+
   return NextResponse.json({ ok: true }, { status: 201 });
+}
+
+/**
+ * Emails the site owner about a new signup via Resend.
+ * No-ops unless RESEND_API_KEY is configured. Duplicate re-submissions
+ * of the same address will notify again — harmless at launch volume.
+ */
+async function notifyOwner(email: string, productInterest: string | null) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  // Sandbox sender works out of the box; switch to a renovolabs.eu sender
+  // once the domain is verified in Resend.
+  const from = process.env.WAITLIST_NOTIFY_FROM ?? "Renovo Labs <onboarding@resend.dev>";
+  const to = process.env.WAITLIST_NOTIFY_TO ?? "info@renovolabs.eu";
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: `Waitlist signup: ${email}`,
+        text: [
+          "New Renovo Labs waitlist signup",
+          "",
+          `Email:    ${email}`,
+          `Interest: ${productInterest ?? "General interest"}`,
+          `Time:     ${new Date().toISOString()}`,
+        ].join("\n"),
+      }),
+    });
+    if (!res.ok) {
+      console.error(`[waitlist] Notification email failed (${res.status}): ${await res.text().catch(() => "")}`);
+    }
+  } catch (error) {
+    console.error("[waitlist] Notification email failed:", error);
+  }
 }
