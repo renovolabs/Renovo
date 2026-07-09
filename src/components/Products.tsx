@@ -18,7 +18,7 @@ export default function Products() {
           The catalog
         </p>
         <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-[-0.02em] text-snow sm:text-4xl">
-          Ten compounds. One standard.
+          Twelve products. One standard.
         </h2>
       </Reveal>
 

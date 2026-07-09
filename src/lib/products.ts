@@ -18,14 +18,12 @@ export interface Product {
   image?: string;
 }
 
+/** Official photography lives at /assets/products/<slug>.png for every product. */
+const productImage = (slug: string) => `/assets/products/${slug}.png`;
+
 // Codes follow the lot format on the official label stock (LOT: RL-001A).
 export const PRODUCTS: Product[] = [
-  {
-    name: "Retatrutide",
-    code: "RL-001",
-    slug: "retatrutide",
-    image: "/assets/products/retatrutide.png",
-  },
+  { name: "Retatrutide", code: "RL-001", slug: "retatrutide" },
   { name: "Tirzepatide", code: "RL-002", slug: "tirzepatide" },
   { name: "BPC-157", code: "RL-003", slug: "bpc-157" },
   { name: "GHK-Cu", code: "RL-004", slug: "ghk-cu" },
@@ -37,7 +35,7 @@ export const PRODUCTS: Product[] = [
   { name: "KPV", code: "RL-010", slug: "kpv" },
   { name: "Bac Water 3 mL", code: "RL-011", slug: "bac-water-3ml" },
   { name: "Bac Water 10 mL", code: "RL-012", slug: "bac-water-10ml" },
-];
+].map((p) => ({ ...p, image: productImage(p.slug) }));
 
 /** Valid values accepted by the waitlist API for product_interest. */
 export const PRODUCT_SLUGS: readonly string[] = PRODUCTS.map((p) => p.slug);
