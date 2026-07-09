@@ -24,12 +24,11 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2 text-sm text-fog">
-            {/* PLACEHOLDER contact — replace with the official inbox */}
             <a
-              href="mailto:contact@renovolabs.example"
+              href="mailto:info@renovolabs.eu"
               className="transition-colors hover:text-accent"
             >
-              contact@renovolabs.example
+              info@renovolabs.eu
             </a>
             <a href="#products" className="transition-colors hover:text-accent">
               Catalog
