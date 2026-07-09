@@ -53,23 +53,30 @@ export async function POST(request: Request) {
     );
   }
 
-  const response = await fetch(`${supabaseUrl}/rest/v1/waitlist`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      // Merge on the unique email column: re-joining is idempotent.
-      Prefer: "resolution=merge-duplicates",
+  // on_conflict=email is required for merge-duplicates to target the email
+  // unique constraint (not the primary key) — re-joining stays idempotent.
+  const response = await fetch(
+    `${supabaseUrl.replace(/\/+$/, "")}/rest/v1/waitlist?on_conflict=email`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        Prefer: "resolution=merge-duplicates",
+      },
+      body: JSON.stringify({ email, product_interest: productInterest }),
     },
-    body: JSON.stringify({ email, product_interest: productInterest }),
-  });
+  );
 
-  if (!response.ok) {
+  // 409 = already on the list; treat as success rather than an error.
+  if (!response.ok && response.status !== 409) {
     const detail = await response.text().catch(() => "");
     console.error(`[waitlist] Supabase insert failed (${response.status}): ${detail}`);
     return NextResponse.json(
-      { error: "We couldn't save your spot. Please try again." },
+      // The ref code surfaces the upstream status so failures can be
+      // diagnosed from the UI without log access (401/403 key, 404 URL/table).
+      { error: `We couldn't save your spot. Please try again. (ref ${response.status})` },
       { status: 502 },
     );
   }
