@@ -22,11 +22,12 @@ export default function Products() {
         </h2>
       </Reveal>
 
-      <ul className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
+      {/* 12 products → even rows at every breakpoint (2 / 3 / 4 columns) */}
+      <ul className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {PRODUCTS.map((product, i) => (
           <li key={product.slug}>
             {/* Stagger within each viewport row, capped so late rows don't lag */}
-            <Reveal delay={(i % 5) * 0.08}>
+            <Reveal delay={(i % 4) * 0.08}>
               <div className="group relative rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 hover:border-accent/40 sm:p-5">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-xl">
                   {product.image ? (

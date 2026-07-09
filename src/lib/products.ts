@@ -35,6 +35,8 @@ export const PRODUCTS: Product[] = [
   { name: "MOTS-c", code: "RL-008", slug: "mots-c" },
   { name: "Tesamorelin", code: "RL-009", slug: "tesamorelin" },
   { name: "KPV", code: "RL-010", slug: "kpv" },
+  { name: "Bac Water 3 mL", code: "RL-011", slug: "bac-water-3ml" },
+  { name: "Bac Water 10 mL", code: "RL-012", slug: "bac-water-10ml" },
 ];
 
 /** Valid values accepted by the waitlist API for product_interest. */

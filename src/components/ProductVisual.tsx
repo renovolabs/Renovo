@@ -84,7 +84,8 @@ export default function ProductVisual({ name, code }: ProductVisualProps) {
         y="152"
         textAnchor="middle"
         fill="#111318"
-        fontSize="10.5"
+        // Long compound names shrink to stay inside the label plate
+        fontSize={name.length > 12 ? 8 : 10.5}
         fontWeight="700"
         letterSpacing="0.05em"
         fontFamily="var(--font-mono), monospace"
