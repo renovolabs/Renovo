@@ -53,10 +53,13 @@ export async function POST(request: Request) {
     );
   }
 
+  // Accept both the bare project URL and one pasted with /rest/v1 attached.
+  const baseUrl = supabaseUrl.replace(/\/+$/, "").replace(/\/rest\/v1$/, "");
+
   // on_conflict=email is required for merge-duplicates to target the email
   // unique constraint (not the primary key) — re-joining stays idempotent.
   const response = await fetch(
-    `${supabaseUrl.replace(/\/+$/, "")}/rest/v1/waitlist?on_conflict=email`,
+    `${baseUrl}/rest/v1/waitlist?on_conflict=email`,
     {
       method: "POST",
       headers: {
