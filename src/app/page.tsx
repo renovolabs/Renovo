@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import Philosophy from "@/components/Philosophy";
+import Community from "@/components/Community";
 import Waitlist from "@/components/Waitlist";
 import Footer from "@/components/Footer";
 
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <Products />
       <Philosophy />
+      <Community />
       <Waitlist />
       <Footer />
     </main>

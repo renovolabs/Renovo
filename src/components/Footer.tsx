@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TELEGRAM_URL } from "@/lib/site";
 
 /**
  * Footer — legal, contact, and the mandatory compliance block.
@@ -35,6 +36,14 @@ export default function Footer() {
             </a>
             <a href="#waitlist" className="transition-colors hover:text-accent">
               Waitlist
+            </a>
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              Telegram
             </a>
           </div>
         </div>

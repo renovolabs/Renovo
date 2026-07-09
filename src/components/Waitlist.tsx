@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { PRODUCTS } from "@/lib/products";
+import { TELEGRAM_URL } from "@/lib/site";
+import { TelegramIcon } from "./Community";
 import Reveal from "./Reveal";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -92,6 +94,19 @@ export default function Waitlist() {
                   <p className="mt-3 text-sm leading-relaxed text-fog">
                     We&rsquo;ll be in touch when allocation opens. No noise
                     before then.
+                  </p>
+                  {/* Post-conversion ask — the highest-intent moment */}
+                  <a
+                    href={TELEGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2.5 rounded-xl bg-accent px-6 py-3 text-[14px] font-semibold text-base transition-opacity duration-200 hover:opacity-90"
+                  >
+                    <TelegramIcon />
+                    Join the community on Telegram
+                  </a>
+                  <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fog/60">
+                    Announcements · Discounts · Community
                   </p>
                 </motion.div>
               ) : (
