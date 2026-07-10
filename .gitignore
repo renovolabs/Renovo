@@ -27,3 +27,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# python bytecode (skill scripts)
+__pycache__/
+*.pyc
