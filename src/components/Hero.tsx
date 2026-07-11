@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 /**
@@ -20,6 +21,11 @@ const VIAL_H = Math.round((1475 / 651) * VIAL_W);
 export default function Hero() {
   const reduceMotion = useReducedMotion();
 
+  // Mount gate: the background video only loads after hydration so it
+  // never competes with the LCP (headline + product render).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   // Shared entrance: fade + rise, staggered by index.
   const rise = (i: number) => ({
     initial: { opacity: 0, y: reduceMotion ? 0 : 28 },
@@ -36,6 +42,34 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-svh flex-col justify-center overflow-hidden px-4 pb-20 pt-32 sm:px-6"
     >
+      {/* ── Ambient background: AI-generated macro loop, heavily darkened.
+             Poster still everywhere; live video on desktop only (mobile
+             gets the poster — battery/data) and never for reduced motion. */}
+      <div aria-hidden className="absolute inset-0">
+        <Image
+          src="/assets/hero-bg-poster.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        {mounted && !reduceMotion && (
+          <video
+            className="absolute inset-0 hidden h-full w-full object-cover opacity-30 lg:block"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/assets/hero-bg-poster.jpg"
+          >
+            <source src="/assets/hero-bg.mp4" type="video/mp4" />
+          </video>
+        )}
+        {/* Darkening + edge blend into the page background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-base/75 via-base/70 to-base" />
+      </div>
+
       {/* Static ambient glow anchored behind the product */}
       <div
         aria-hidden
