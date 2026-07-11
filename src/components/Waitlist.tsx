@@ -105,7 +105,7 @@ export default function Waitlist() {
                     <TelegramIcon />
                     Join the community on Telegram
                   </a>
-                  <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fog/60">
+                  <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
                     Announcements · Discounts · Community
                   </p>
                 </motion.div>
@@ -127,6 +127,7 @@ export default function Waitlist() {
                     >
                       Email
                     </label>
+                    {/* 16px input text — anything smaller triggers iOS auto-zoom */}
                     <input
                       id="waitlist-email"
                       type="email"
@@ -135,7 +136,7 @@ export default function Waitlist() {
                       placeholder="you@lab.institution"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="mt-2 w-full rounded-xl border border-line bg-base px-4 py-3 text-[15px] text-snow placeholder:text-fog/50 focus:border-accent/60"
+                      className="mt-2 w-full rounded-xl border border-line bg-base px-4 py-3 text-[16px] text-snow placeholder:text-fog/70 focus:border-accent/60"
                     />
                   </div>
 
@@ -146,19 +147,32 @@ export default function Waitlist() {
                     >
                       Compound of interest · optional
                     </label>
-                    <select
-                      id="waitlist-interest"
-                      value={interest}
-                      onChange={(e) => setInterest(e.target.value)}
-                      className="mt-2 w-full appearance-none rounded-xl border border-line bg-base px-4 py-3 text-[15px] text-snow focus:border-accent/60"
-                    >
-                      <option value="">General interest</option>
-                      {PRODUCTS.map((product) => (
-                        <option key={product.slug} value={product.slug}>
-                          {product.name} · {product.code}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative mt-2">
+                      <select
+                        id="waitlist-interest"
+                        value={interest}
+                        onChange={(e) => setInterest(e.target.value)}
+                        className="w-full appearance-none rounded-xl border border-line bg-base px-4 py-3 pr-11 text-[16px] text-snow focus:border-accent/60"
+                      >
+                        <option value="">General interest</option>
+                        {PRODUCTS.map((product) => (
+                          <option key={product.slug} value={product.slug}>
+                            {product.name} · {product.code}
+                          </option>
+                        ))}
+                      </select>
+                      {/* Chevron affordance — appearance-none strips the native one */}
+                      <svg
+                        aria-hidden
+                        viewBox="0 0 16 16"
+                        className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-fog"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
                   </div>
 
                   {/* Mandatory research-use / age acknowledgment — compliance */}
@@ -190,7 +204,7 @@ export default function Waitlist() {
                   <button
                     type="submit"
                     disabled={!acknowledged || status === "submitting"}
-                    className="mt-1 rounded-xl bg-accent px-6 py-3.5 text-[15px] font-semibold text-base transition-opacity duration-200 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="mt-1 cursor-pointer rounded-xl bg-accent px-6 py-3.5 text-[15px] font-semibold text-base transition-opacity duration-200 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     {status === "submitting" ? "Submitting…" : "Request access"}
                   </button>

@@ -19,7 +19,7 @@ export default function Footer() {
               width={112}
               height={110}
             />
-            <p className="mt-5 max-w-xs font-mono text-[10px] leading-relaxed tracking-[0.12em] text-fog/70">
+            <p className="mt-5 max-w-xs font-mono text-[10px] leading-relaxed tracking-[0.12em] text-fog">
               PRECISION-MANUFACTURED RESEARCH COMPOUNDS
             </p>
           </div>
@@ -67,16 +67,16 @@ export default function Footer() {
 
           {/* JURISDICTION-SPECIFIC LEGAL BLOCK — TBD.
               Awaiting counsel; keep this visible marker until it lands. */}
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-fog/50">
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-fog">
             [ Jurisdiction-specific legal notice — pending legal review ]
           </p>
         </div>
 
         <div className="mt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[10px] tracking-[0.14em] text-fog/60">
+          <p className="font-mono text-[10px] tracking-[0.14em] text-fog">
             © {new Date().getFullYear()} RENOVO LABS. ALL RIGHTS RESERVED.
           </p>
-          <p className="font-mono text-[10px] tracking-[0.14em] text-fog/60">
+          <p className="font-mono text-[10px] tracking-[0.14em] text-fog">
             LABORATORY RESEARCH USE ONLY
           </p>
         </div>

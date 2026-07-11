@@ -43,9 +43,10 @@ export default function Nav() {
             </span>
           </a>
 
+          {/* py-3 keeps the tap target ≥44px on touch devices */}
           <a
             href="#waitlist"
-            className="rounded-full border border-line bg-raised px-4 py-2 text-[13px] font-medium text-snow transition-colors duration-200 hover:border-accent/60 hover:text-accent"
+            className="rounded-full border border-line bg-raised px-5 py-3 text-[13px] font-medium text-snow transition-colors duration-200 hover:border-accent/60 hover:text-accent"
           >
             Join the waitlist
           </a>
