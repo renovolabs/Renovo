@@ -77,82 +77,81 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-4 pb-16 pt-28 sm:px-6"
+      className="relative flex h-svh flex-col items-center justify-end overflow-hidden px-4 pb-24 sm:px-6"
     >
-      {/* Faint static depth behind the vial — no distractions */}
+      {/* ── The vial stage — full-bleed viewport backdrop ───────────── */}
+      <motion.div
+        style={{
+          scale: vialScale,
+          y: vialY,
+          opacity: vialOpacity,
+          // Dissolve the clip's edges into the page background so the
+          // video's rectangular bounds are never visible
+          maskImage:
+            "radial-gradient(ellipse 55% 60% at 50% 45%, black 48%, transparent 76%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 55% 60% at 50% 45%, black 48%, transparent 76%)",
+        }}
+        className="absolute left-1/2 top-0 aspect-[9/16] h-[70%] -translate-x-1/2"
+      >
+        {reduceMotion ? (
+          /* Reduced motion: the lit master frame, nothing moves */
+          <Image
+            src={POSTER_SRC}
+            alt="Retatrutide vial — Renovo Labs"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        ) : (
+          <>
+            {/* Act 1 — light sweep reveal, plays once */}
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ opacity: settled ? 0 : 1 }}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              poster={POSTER_SRC}
+              onEnded={() => {
+                loopRef.current?.play().catch(() => undefined);
+                settle();
+              }}
+              onError={settle}
+              aria-label="Retatrutide vial — Renovo Labs"
+            >
+              <source src={REVEAL_SRC} type="video/mp4" />
+            </video>
+
+            {/* Act 2 — seamless idle drift; preloaded, swapped in on the
+                shared frame so the cut is invisible */}
+            <video
+              ref={loopRef}
+              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+              style={{ opacity: settled ? 1 : 0 }}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster={POSTER_SRC}
+              aria-hidden
+            >
+              <source src={LOOP_SRC} type="video/mp4" />
+            </video>
+          </>
+        )}
+      </motion.div>
+
+      {/* Legibility scrim — copy sits over the vial's lower half */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[42%] h-[480px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.04] blur-[130px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-base via-base/60 to-transparent"
       />
 
-      <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-        {/* ── The vial stage ─────────────────────────────────────────── */}
-        <motion.div
-          style={{
-            scale: vialScale,
-            y: vialY,
-            opacity: vialOpacity,
-            // Dissolve the clip's edges into the page background so the
-            // video's rectangular bounds are never visible
-            maskImage:
-              "radial-gradient(ellipse 62% 55% at 50% 46%, black 58%, transparent 82%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 62% 55% at 50% 46%, black 58%, transparent 82%)",
-          }}
-          className="relative h-[46svh] w-full max-w-[320px] sm:h-[50svh]"
-        >
-          {reduceMotion ? (
-            /* Reduced motion: the lit master frame, nothing moves */
-            <Image
-              src={POSTER_SRC}
-              alt="Retatrutide vial — Renovo Labs"
-              fill
-              priority
-              sizes="320px"
-              className="object-contain"
-            />
-          ) : (
-            <>
-              {/* Act 1 — light sweep reveal, plays once */}
-              <video
-                className="absolute inset-0 h-full w-full object-contain"
-                style={{ opacity: settled ? 0 : 1 }}
-                autoPlay
-                muted
-                playsInline
-                preload="auto"
-                poster={POSTER_SRC}
-                onEnded={() => {
-                  loopRef.current?.play().catch(() => undefined);
-                  settle();
-                }}
-                onError={settle}
-                aria-label="Retatrutide vial — Renovo Labs"
-              >
-                <source src={REVEAL_SRC} type="video/mp4" />
-              </video>
-
-              {/* Act 2 — seamless idle drift; preloaded, swapped in on the
-                  shared frame so the cut is invisible */}
-              <video
-                ref={loopRef}
-                className="absolute inset-0 h-full w-full object-contain transition-opacity duration-500"
-                style={{ opacity: settled ? 1 : 0 }}
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster={POSTER_SRC}
-                aria-hidden
-              >
-                <source src={LOOP_SRC} type="video/mp4" />
-              </video>
-            </>
-          )}
-        </motion.div>
-
-        {/* ── Copy — enters after the light lands ────────────────────── */}
-        <div className="mt-10">
+      {/* ── Copy — enters after the light lands, overlaid bottom-third ── */}
+      <div className="relative mx-auto w-full max-w-4xl text-center">
           <motion.p
             {...rise(0)}
             className="font-mono text-[11px] uppercase tracking-[0.34em] text-accent"
@@ -162,7 +161,7 @@ export default function Hero() {
 
           <motion.h1
             {...rise(1)}
-            className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-snow sm:text-5xl md:text-6xl"
+            className="mt-6 text-balance text-3xl font-semibold leading-[1.05] tracking-[-0.03em] text-snow sm:text-4xl md:text-5xl"
           >
             Research-grade peptides.
             <br />
@@ -191,7 +190,6 @@ export default function Hero() {
               FIRST BATCH · LIMITED ALLOCATION
             </span>
           </motion.div>
-        </div>
       </div>
 
       {/* Scroll hint */}
