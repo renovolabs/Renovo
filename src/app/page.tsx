@@ -1,5 +1,5 @@
 import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
+import Hero from "@/components/HeroCinematic";
 import Products from "@/components/Products";
 import Philosophy from "@/components/Philosophy";
 import Community from "@/components/Community";

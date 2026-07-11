@@ -47,7 +47,7 @@ export default function Hero() {
   // tab restored mid-clip), the page must not stay dark.
   useEffect(() => {
     if (phase !== "reveal") return;
-    const timer = setTimeout(settle, 4500);
+    const timer = setTimeout(settle, 3200); // reveal clip runs 2.4s
     return () => clearTimeout(timer);
   }, [phase, settle]);
 
@@ -88,7 +88,17 @@ export default function Hero() {
       <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center text-center">
         {/* ── The vial stage ─────────────────────────────────────────── */}
         <motion.div
-          style={{ scale: vialScale, y: vialY, opacity: vialOpacity }}
+          style={{
+            scale: vialScale,
+            y: vialY,
+            opacity: vialOpacity,
+            // Dissolve the clip's edges into the page background so the
+            // video's rectangular bounds are never visible
+            maskImage:
+              "radial-gradient(ellipse 62% 55% at 50% 46%, black 58%, transparent 82%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 62% 55% at 50% 46%, black 58%, transparent 82%)",
+          }}
           className="relative h-[46svh] w-full max-w-[320px] sm:h-[50svh]"
         >
           {reduceMotion ? (
@@ -126,7 +136,7 @@ export default function Hero() {
                   shared frame so the cut is invisible */}
               <video
                 ref={loopRef}
-                className="absolute inset-0 h-full w-full object-contain transition-opacity duration-300"
+                className="absolute inset-0 h-full w-full object-contain transition-opacity duration-500"
                 style={{ opacity: settled ? 1 : 0 }}
                 muted
                 loop
