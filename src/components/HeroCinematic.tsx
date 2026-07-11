@@ -80,19 +80,11 @@ export default function Hero() {
       className="relative flex h-svh flex-col items-center justify-end overflow-hidden px-4 pb-24 sm:px-6"
     >
       {/* ── The vial stage — full-bleed viewport backdrop ───────────── */}
+      {/* Mobile: full-bleed, the vial owns the whole screen.
+          sm+: aspect-locked stage, edges dissolved (.hero-stage mask). */}
       <motion.div
-        style={{
-          scale: vialScale,
-          y: vialY,
-          opacity: vialOpacity,
-          // Dissolve the clip's edges into the page background so the
-          // video's rectangular bounds are never visible
-          maskImage:
-            "radial-gradient(ellipse 55% 60% at 50% 45%, black 48%, transparent 76%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 55% 60% at 50% 45%, black 48%, transparent 76%)",
-        }}
-        className="absolute left-1/2 top-0 aspect-[9/16] h-[70%] -translate-x-1/2"
+        style={{ scale: vialScale, y: vialY, opacity: vialOpacity }}
+        className="hero-stage absolute left-1/2 top-[-35%] aspect-[9/16] h-[125%] -translate-x-1/2 sm:top-0 sm:h-[70%]"
       >
         {reduceMotion ? (
           /* Reduced motion: the lit master frame, nothing moves */
@@ -144,10 +136,11 @@ export default function Hero() {
         )}
       </motion.div>
 
-      {/* Legibility scrim — copy sits over the vial's lower half */}
+      {/* Legibility scrim — heavy on phones where copy overlays the
+          full-bleed vial, lighter on larger screens */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-base via-base/60 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-base via-base/85 to-transparent sm:h-[55%] sm:via-base/60"
       />
 
       {/* ── Copy — enters after the light lands, overlaid bottom-third ── */}

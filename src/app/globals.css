@@ -58,3 +58,21 @@ body {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* Hero vial stage: full-bleed on phones (video edges live off-screen);
+   from sm up the stage is aspect-locked and its edges dissolve into
+   the page background. */
+@media (min-width: 640px) {
+  .hero-stage {
+    mask-image: radial-gradient(
+      ellipse 55% 60% at 50% 45%,
+      black 48%,
+      transparent 76%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 55% 60% at 50% 45%,
+      black 48%,
+      transparent 76%
+    );
+  }
+}
