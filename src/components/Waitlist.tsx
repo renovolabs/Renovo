@@ -70,10 +70,17 @@ export default function Waitlist() {
           <p className="mt-6 text-center text-pretty leading-relaxed text-fog">
             Join the waitlist for allocation priority and launch updates.
           </p>
+
+          {/* The perk — stated at the moment of decision */}
+          <p className="mt-6 text-center">
+            <span className="inline-block rounded-full border border-accent/30 bg-accent/[0.06] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+              Waitlist perk — 25% off your first order
+            </span>
+          </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mt-12 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+          <div className="mt-10 rounded-2xl border border-line bg-surface p-6 sm:p-8">
             <AnimatePresence mode="wait" initial={false}>
               {status === "success" ? (
                 /* ── Success state ──────────────────────────────────── */
@@ -92,8 +99,9 @@ export default function Waitlist() {
                     You&rsquo;re on the list.
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-fog">
-                    We&rsquo;ll be in touch when allocation opens. No noise
-                    before then.
+                    Your 25% first-order discount is locked in — it arrives
+                    with your access invite. We&rsquo;ll be in touch when
+                    allocation opens. No noise before then.
                   </p>
                   {/* Post-conversion ask — the highest-intent moment */}
                   <a

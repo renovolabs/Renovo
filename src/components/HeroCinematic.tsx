@@ -190,7 +190,7 @@ export default function Hero() {
               Join the waitlist
             </a>
             <span className="font-mono text-[11px] tracking-[0.2em] text-fog">
-              FIRST BATCH · LIMITED ALLOCATION
+              LIMITED FIRST BATCH · 25% OFF YOUR FIRST ORDER
             </span>
           </motion.div>
       </div>
