@@ -74,18 +74,17 @@ export default function Hero() {
   });
 
   return (
-    <section
-      ref={sectionRef}
-      id="top"
-      className="relative flex h-svh flex-col items-center justify-end overflow-hidden px-4 pb-24 sm:px-6"
-    >
-      {/* ── The vial stage — full-bleed viewport backdrop ───────────── */}
-      {/* Mobile: full-bleed, the vial owns the whole screen.
-          sm+: aspect-locked stage, edges dissolved (.hero-stage mask). */}
-      <motion.div
-        style={{ scale: vialScale, y: vialY, opacity: vialOpacity }}
-        className="hero-stage absolute left-1/2 top-[-35%] aspect-[9/16] h-[125%] -translate-x-1/2 sm:top-0 sm:h-[70%]"
-      >
+    <section ref={sectionRef} id="top" className="relative">
+      {/* ── Screen one: the vial alone ──────────────────────────────────
+             Mobile: full-bleed cover, vial centered — no copy on the
+             first screen; the headline arrives on scroll.
+             sm+: aspect-locked stage, edges dissolved (.hero-stage mask),
+             copy overlaid in the lower third. */}
+      <div className="relative h-svh overflow-hidden">
+        <motion.div
+          style={{ scale: vialScale, y: vialY, opacity: vialOpacity }}
+          className="hero-stage absolute inset-0 sm:inset-auto sm:left-1/2 sm:top-0 sm:aspect-[9/16] sm:h-[70%] sm:-translate-x-1/2"
+        >
         {reduceMotion ? (
           /* Reduced motion: the lit master frame, nothing moves */
           <Image
@@ -134,17 +133,28 @@ export default function Hero() {
             </video>
           </>
         )}
-      </motion.div>
+        </motion.div>
 
-      {/* Legibility scrim — heavy on phones where copy overlays the
-          full-bleed vial, lighter on larger screens */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-base via-base/85 to-transparent sm:h-[55%] sm:via-base/60"
-      />
+        {/* Bottom fade: on phones just a soft blend into the page (no
+            copy up here); on sm+ a legibility scrim under the overlay */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-base to-transparent sm:h-[55%] sm:via-base/60"
+        />
 
-      {/* ── Copy — enters after the light lands, overlaid bottom-third ── */}
-      <div className="relative mx-auto w-full max-w-4xl text-center">
+        {/* Scroll hint — the only text on the mobile first screen */}
+        <motion.div
+          {...rise(4)}
+          aria-hidden
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.3em] text-fog"
+        >
+          SCROLL
+        </motion.div>
+      </div>
+
+      {/* ── Copy — below the fold on phones (arrives on scroll);
+             overlaid on the stage's lower third from sm up ───────────── */}
+      <div className="relative mx-auto w-full max-w-4xl px-4 pb-24 pt-4 text-center sm:absolute sm:inset-x-0 sm:bottom-24 sm:px-6 sm:pb-0 sm:pt-0">
           <motion.p
             {...rise(0)}
             className="font-mono text-[11px] uppercase tracking-[0.34em] text-accent"
@@ -184,15 +194,6 @@ export default function Hero() {
             </span>
           </motion.div>
       </div>
-
-      {/* Scroll hint */}
-      <motion.div
-        {...rise(4)}
-        aria-hidden
-        className="absolute bottom-6 font-mono text-[10px] tracking-[0.3em] text-fog"
-      >
-        SCROLL
-      </motion.div>
     </section>
   );
 }
