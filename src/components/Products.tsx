@@ -27,8 +27,9 @@ export default function Products() {
         {PRODUCTS.map((product, i) => (
           <li key={product.slug}>
             {/* Stagger within each viewport row, capped so late rows don't lag */}
-            <Reveal delay={(i % 4) * 0.08}>
-              <div className="group relative rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 hover:border-accent/40 sm:p-5">
+            {/* h-full chain keeps cards in a row level when a name wraps */}
+            <Reveal delay={(i % 4) * 0.08} className="h-full">
+              <div className="group relative h-full rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 hover:border-accent/40 sm:p-5">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-xl">
                   {product.image ? (
                     // Official product photography
@@ -48,7 +49,7 @@ export default function Products() {
                   <h3 className="text-sm font-semibold tracking-tight text-snow">
                     {product.name}
                   </h3>
-                  <span className="font-mono text-[10px] tracking-[0.14em] text-fog">
+                  <span className="shrink-0 whitespace-nowrap font-mono text-[10px] tracking-[0.14em] text-fog">
                     {product.code}
                   </span>
                 </div>
