@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { PRODUCTS } from "@/lib/products";
+import { PRODUCTS, PRODUCT_COUNT_WORD } from "@/lib/products";
 import ProductVisual from "./ProductVisual";
 import Reveal from "./Reveal";
 
@@ -18,11 +18,11 @@ export default function Products() {
           The catalog
         </p>
         <h2 className="mt-4 max-w-2xl text-balance text-3xl font-semibold tracking-[-0.02em] text-snow sm:text-4xl">
-          Twelve products. One standard.
+          {PRODUCT_COUNT_WORD} products. One standard.
         </h2>
       </Reveal>
 
-      {/* 12 products → even rows at every breakpoint (2 / 3 / 4 columns) */}
+      {/* 2 / 3 / 4 columns — a multiple-of-12 catalog fills every row evenly */}
       <ul className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {PRODUCTS.map((product, i) => (
           <li key={product.slug}>

@@ -18,11 +18,20 @@ export interface Product {
   image?: string;
 }
 
-/** Official photography lives at /assets/products/<slug>.png for every product. */
+/** A catalog entry before the image path is resolved. */
+type ProductEntry = Omit<Product, "image"> & {
+  /**
+   * Set false until /assets/products/<slug>.png exists — the card then
+   * renders the placeholder vial instead of a broken image.
+   */
+  photo?: false;
+};
+
+/** Official photography lives at /assets/products/<slug>.png. */
 const productImage = (slug: string) => `/assets/products/${slug}.png`;
 
 // Codes follow the lot format on the official label stock (LOT: RL-001A).
-export const PRODUCTS: Product[] = [
+const ENTRIES: ProductEntry[] = [
   { name: "Retatrutide", code: "RL-001", slug: "retatrutide" },
   { name: "Tirzepatide", code: "RL-002", slug: "tirzepatide" },
   { name: "BPC-157", code: "RL-003", slug: "bpc-157" },
@@ -35,7 +44,22 @@ export const PRODUCTS: Product[] = [
   { name: "KPV", code: "RL-010", slug: "kpv" },
   { name: "Bac Water 3 mL", code: "RL-011", slug: "bac-water-3ml" },
   { name: "Bac Water 10 mL", code: "RL-012", slug: "bac-water-10ml" },
-].map((p) => ({ ...p, image: productImage(p.slug) }));
+];
+
+export const PRODUCTS: Product[] = ENTRIES.map(({ photo, ...p }) => ({
+  ...p,
+  ...(photo === false ? {} : { image: productImage(p.slug) }),
+}));
 
 /** Valid values accepted by the waitlist API for product_interest. */
 export const PRODUCT_SLUGS: readonly string[] = PRODUCTS.map((p) => p.slug);
+
+const COUNT_WORDS = [
+  "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+  "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
+  "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+];
+
+/** Catalog size, spelled out for the section headline ("Twelve products."). */
+export const PRODUCT_COUNT_WORD =
+  COUNT_WORDS[PRODUCTS.length] ?? String(PRODUCTS.length);
